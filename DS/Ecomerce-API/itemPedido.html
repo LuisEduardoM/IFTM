@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="itemPedidoModule">
+<head>
+	<meta-charset="utf-8">
+	<title>Pedido</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-0.14.1.min.js"></script>
+	<script src="control/itemPedidoControl.js"></script>
+</head>
+<body ng-controller="itemPedidoControl">
+	<div ng-include="'menu.html'"></div>
+	<div class="panel panel-default">
+		
+		        
+		<div class="panel-heading">Cadastro de Itens do Pedido</div>
+		<div class="panel-body">
+			<div>
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active">
+			    	<a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro</a>
+			    </li>
+			    <li role="presentation">
+			    	<a href="#dados" aria-controls="dados" role="tab" data-toggle="tab">Dados</a>
+			    </li>
+			  </ul>
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+			    <div role="tabpanel" class="tab-pane active" id="cadastro">					
+			    	<form name="pessoaForm" class="css-form" ng-submit="pessoaForm.$valid && salvar()" novalidate>
+				    	<br>
+						<span ng-repeat="mensagem in mensagens">{{mensagem}}<br></span>
+						<div ng-show="pessoaForm.$submitted">
+						    <div ng-show="pessoaForm.quantidade.$error.required">Preencha a quantidade</div>     				
+									 
+	    				</div>    				
+						<br>
+						<button type="button" class="btn btn-info" ng-click="novo()">Novo</button>
+						<button type="submit" class="btn btn-success">Salvar</button>
+						<button type="button" class="btn btn-danger" ng-click="excluir()">Excluir</button>
+						<button type="button" class="btn btn-warning" ng-click="pesquisar()">Pesquisar</button>
+						<hr/>
+					  <div class="form-group col-md-2">
+					    <label for="exampleInputId">ID</label>
+					    <input type="number" disabled="true" class="form-control" ng-model="itemPedido.id" placeholder="ID">
+						</div>
+						
+						<div class="form-group col-md-6">
+								<label for="inputPedido">Pedido</label>
+								<select id="inputPedido" class="form-control" ng-model="itemPedido.pedido.id">
+									<option ng-repeat="pedido in pedidos" value="{{pedido.id}}">{{pedido.cliente.nome}}</option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-6">
+								<label for="inputProduto">Produto</label>
+								<select id="inputProduto" class="form-control" ng-model="itemPedido.produto.id">
+									<option ng-repeat="produto in produtos" value="{{produto.id}}">{{produto.nome}}</option>
+							</select>
+						</div>
+
+					  <div class="form-group col-md-4">
+					    <label for="exampleInputQuantidade">Quantidade</label>
+					    <input type="text" class="form-control" ng-model="itemPedido.quantidade" name="quantidade" placeholder="Insira a quantidade" required=""/>
+						</div>
+				</div>
+			    <div role="tabpanel" class="tab-pane" id="dados">
+				<br>
+				<input type="text" class="form-control" ng-model="criterio" 
+				placeholder="O que voce esta procurando?" /><br>
+			    	<table class="table table-hover">
+							<th>ID</th>
+							<th>Pedido</th>
+							<th>Produto</th>
+							<th>Quantidade</th>
+
+			    		<tr ng-repeat="itemPedidoTabela in itemPedidos | filter:criterio" ng-click="seleciona(itemPedidoTabela);">
+								<td>{{itemPedidoTabela.id}}</td>
+								<td>{{itemPedidoTabela.pedido.cliente.nome}}</td>
+								<td>{{itemPedidoTabela.produto.nome}}</td>
+								<td>{{itemPedidoTabela.quantidade}}</td>
+			    		</tr>
+					</table>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
