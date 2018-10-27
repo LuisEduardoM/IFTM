@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 public class AtividadeResourceTest {
 
-	/*@Autowired
+	@Autowired
 	private WebApplicationContext context;
 	
 	private MockMvc mvc;
@@ -27,7 +27,7 @@ public class AtividadeResourceTest {
 	private String uri = "/atividade/1";
 
 	@Before
-	private void setup() {
+	public void setup() {
 		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 	}
 	
@@ -42,5 +42,5 @@ public class AtividadeResourceTest {
 	public void testaNotFound() throws Exception {
 		this.mvc.perform(get("/atividade/10"))
 			.andExpect(status().isNotFound());
-	}*/
+	}
 }
