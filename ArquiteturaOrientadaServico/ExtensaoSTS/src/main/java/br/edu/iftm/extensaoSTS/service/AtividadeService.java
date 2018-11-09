@@ -15,4 +15,12 @@ public class AtividadeService {
 	public Atividade buscar(Integer id) {
 		return atividadeRepositorio.findById(id).get();
 	}
+	
+	public void salvar(Atividade atividade) {
+		atividadeRepositorio.save(atividade);
+	}
+	
+	public void deletar(Integer id) {
+		atividadeRepositorio.deleteById(id);
+	}
 }
